@@ -34,7 +34,10 @@ const products = [
 
 const cart = [];
 
-products.forEach(function (product) {
+
+// Product Details
+function productDetails(){
+  products.forEach(function (product) {
   // <div class="product-row">
   //     <p>Laptop - Rs. 50000</p>
   //     <button>Add to cart</button>
@@ -56,7 +59,9 @@ products.forEach(function (product) {
   `;
   productsContainer.appendChild(productDiv);
 });
+}
 
+// Add to Cart
 function addCart(id) {
   // console.log(id)
   const isProductAdded = cart.some((product) => product.id === id);
@@ -77,6 +82,7 @@ function addCart(id) {
   userFeedback(`${productToAdd.name} is added to the cart`, "success");
 }
 
+//rendering cart Details
 function renderCartDetails() {
   cartContainer.innerHTML=``
   cart.forEach(function (product) {
@@ -91,6 +97,7 @@ function renderCartDetails() {
   totalCounter()
 }
 
+// count total amount in cart products
 function totalCounter(){
   let totalPrice = 0
   cart.forEach(function(product){
@@ -100,6 +107,7 @@ function totalCounter(){
   totalPriceContainer.textContent=`Rs. ${totalPrice}`
 }
 
+// removing item from the cart
 function removeFromCart(id) {
   console.log(id);
    const product = cart.find((product)=>product.id == id)
@@ -113,6 +121,7 @@ function removeFromCart(id) {
  
 }
 
+// feedback 
 let timerId;
 function userFeedback(msg, type) {
   clearTimeout(timerId);
@@ -129,16 +138,19 @@ function userFeedback(msg, type) {
   }, 3000);
 }
 
-
+//clear the cart
 function clearCart(){
   cart.length=0
   renderCartDetails()
   userFeedback('Cart is cleared','success')
 }
 
+// sort the cart by price
 function sortByPrice(){
   cart.sort((prod1,prod2)=>prod1.price - prod2.price)
    renderCartDetails()
 }
 
+
+productDetails()
 
